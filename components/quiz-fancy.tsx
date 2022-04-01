@@ -19,9 +19,6 @@ export const QuizFancy: React.FC<{ changeToUgly: () => void }> = ({
     context: { currentAcronym },
   } = state;
 
-  useEffect(() => {
-    return () => {};
-  }, []);
   return (
     <div className={styles.container}>
       <div className={styles.card}>
@@ -88,6 +85,22 @@ export const QuizFancy: React.FC<{ changeToUgly: () => void }> = ({
             <p>
               Du fick {state.context.points} poäng av {MAX_ROUNDS} möjliga.
             </p>
+            <table>
+              <thead>
+                <th>gissning</th>
+                <th>förkortning</th>
+                <th>rätt</th>
+              </thead>
+              <tbody>
+                {state.context.guesses.map((x) => (
+                  <tr key={x.correct}>
+                    <td>{x.guess}</td>
+                    <td>{x.short}</td>
+                    <td>{x.correct}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </>
         )}
         {/* <button style={{ marginTop: '160px' }} onClick={changeToUgly}>

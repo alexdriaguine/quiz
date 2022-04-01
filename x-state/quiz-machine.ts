@@ -10,7 +10,7 @@ type Context = {
   acronyms: Acronym[];
   currentAcronym: Acronym;
   currentRound: number;
-  guesses: { guess: string; correct: string }[];
+  guesses: { guess: string; short: string; correct: string }[];
 };
 
 type MakeGuessEvent = { type: 'make_guess'; word: string };
@@ -114,7 +114,11 @@ export const createQuizMachine = ({ acronyms, events }: MachineOptions) =>
         save_guess: assign({
           guesses: (context, event) => [
             ...context.guesses,
-            { guess: event.word, correct: context.currentAcronym.long[0] },
+            {
+              guess: event.word,
+              short: context.currentAcronym.short,
+              correct: context.currentAcronym.long[0],
+            },
           ],
         }),
         add_point: assign({ points: (context) => context.points + 1 }),
