@@ -25,19 +25,23 @@ export const QuizFancy: React.FC<{ changeToUgly: () => void }> = ({
   return (
     <div className={styles.container}>
       <div className={styles.card}>
-        <div className={styles.logoContainer}>
+        <div className={styles.logoContainer} style={{ marginBottom: 48 }}>
           <Image {...logo} alt="Ving logo" />
         </div>
-        {state.can('start_game') && (
-          <div className={styles.start}>
-            <h1>Quiz - Gissa förkortningar!</h1>
-            <p>
-              Quizet består av 10st frågor inom BIT, den som svarar rätt på
-              flest vinner
-            </p>
+        <div className={styles.start}>
+          {state.matches('idle') && (
+            <>
+              <h1>Quiz - Gissa förkortningar!</h1>
+              <p>
+                Quizet består av 10st frågor inom BIT, den som svarar rätt på
+                flest vinner
+              </p>
+            </>
+          )}
+          {state.can('start_game') && (
             <Button onClick={() => send('start_game')}>STARTA QUIZ</Button>
-          </div>
-        )}
+          )}
+        </div>
         {state.can('next_guess') && (
           <Button onClick={() => send('next_guess')}>
             {state.context.currentRound === MAX_ROUNDS ? 'SLUT' : 'NÄSTA'}
@@ -72,7 +76,7 @@ export const QuizFancy: React.FC<{ changeToUgly: () => void }> = ({
                 type="text"
                 className={styles.inputField}
                 {...register('word')}
-                style={{ fontSize: 24 }}
+                style={{ fontSize: 24, borderRadius: 8, marginBottom: 36 }}
               />
               <Button type="submit">GISSA</Button>
             </form>
