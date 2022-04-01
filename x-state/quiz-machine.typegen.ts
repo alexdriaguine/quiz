@@ -5,6 +5,7 @@ export interface Typegen0 {
   eventsCausingActions: {
     start: "start_game";
     add_point: "make_guess";
+    save_guess: "make_guess";
     next_acronym: "next_guess";
     reset: "start_game";
     onCorrect: "make_guess";

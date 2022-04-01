@@ -90,6 +90,9 @@ export const QuizFancy: React.FC<{ changeToUgly: () => void }> = ({
             </p>
           </>
         )}
+        {/* <button style={{ marginTop: '160px' }} onClick={changeToUgly}>
+          💩💩🤖🤖✨✨
+        </button> */}
       </div>
     </div>
   );

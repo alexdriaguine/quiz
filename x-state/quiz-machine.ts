@@ -10,6 +10,7 @@ type Context = {
   acronyms: Acronym[];
   currentAcronym: Acronym;
   currentRound: number;
+  guesses: { guess: string; correct: string }[];
 };
 
 type MakeGuessEvent = { type: 'make_guess'; word: string };
@@ -35,6 +36,7 @@ export const createQuizMachine = ({ acronyms, events }: MachineOptions) =>
         acronyms,
         currentRound: 1,
         currentAcronym: { short: '', long: [] },
+        guesses: [],
       },
       tsTypes: {} as import('./quiz-machine.typegen').Typegen0,
       schema: {
@@ -55,11 +57,12 @@ export const createQuizMachine = ({ acronyms, events }: MachineOptions) =>
           on: {
             make_guess: [
               {
-                actions: 'add_point',
+                actions: ['add_point', 'save_guess'],
                 cond: 'correct_guess',
                 target: 'correct',
               },
               {
+                actions: 'save_guess',
                 target: 'incorrect',
               },
             ],
@@ -108,6 +111,12 @@ export const createQuizMachine = ({ acronyms, events }: MachineOptions) =>
     },
     {
       actions: {
+        save_guess: assign({
+          guesses: (context, event) => [
+            ...context.guesses,
+            { guess: event.word, correct: context.currentAcronym.long[0] },
+          ],
+        }),
         add_point: assign({ points: (context) => context.points + 1 }),
         next_acronym: assign({
           currentAcronym: (context) => {
