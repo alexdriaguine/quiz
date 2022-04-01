@@ -31,15 +31,15 @@ export const Quiz: React.FC<{ changeToNormal: () => void }> = ({
     context: { currentAcronym },
   } = state;
 
+  const clickBall = () => {
+    alert('wow!');
+  };
+
   useEffect(() => {
     if (state.value === 'incorrect') playWrong();
     if (state.value === 'correct') playCorrect();
     if (state.value === 'end') playEnd();
   }, [state.value]);
-
-  useEffect(() => {
-    playFart();
-  }, [playFart]);
 
   return (
     <div className={styles.container}>
@@ -120,13 +120,15 @@ export const Quiz: React.FC<{ changeToNormal: () => void }> = ({
           )}
         </div>
         <button onClick={changeToNormal}>💩💩🤖🤖✨✨</button>
+        {/* @ts-ignore */}
         <marquee className={styles.madeby}>
           🍑🥒🍑Web 13 🔥 Web 13 🔥 Web 13 🔥 Web 13 🔥 Web 13 🔥 Web 13 🔥 Web
           13 🔥 Web 13 🔥 Web 13 🔥 Web 13 🔥 Web 13 🔥 Web 13 🔥 Web 13 🔥 Web
           13 🔥 Web 13 🔥 Web 13 🔥 Web 13 🔥 Web 13 🔥 Web 13 🔥 Web 13 🔥 Web
           13 🥒🍑🥒
+          {/* @ts-ignore */}
         </marquee>
-        <div className={styles.ball}>
+        <div className={styles.ball} onClick={clickBall}>
           <b></b>
         </div>
       </main>

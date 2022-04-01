@@ -20,9 +20,6 @@ export const QuizFancy: React.FC<{ changeToUgly: () => void }> = ({
   } = state;
 
   useEffect(() => {
-    const handleKeyPress = (e) => {};
-    window.addEventListener('keypress', handleKeyPress);
-
     return () => {};
   }, []);
   return (
@@ -56,18 +53,26 @@ export const QuizFancy: React.FC<{ changeToUgly: () => void }> = ({
         {state.value === 'guessing' && (
           <>
             <p>Vad betyder detta?</p>
-            <strong>{currentAcronym.short}</strong>
+            <strong style={{ fontSize: 36, marginBottom: 24 }}>
+              {currentAcronym.short}
+            </strong>
             <form
               onSubmit={handleSubmit(({ word }) => {
                 send('make_guess', { word });
                 resetField('word');
               })}
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}
             >
               <input
                 autoComplete="off"
                 type="text"
                 className={styles.inputField}
                 {...register('word')}
+                style={{ fontSize: 24 }}
               />
               <Button type="submit">GISSA</Button>
             </form>
