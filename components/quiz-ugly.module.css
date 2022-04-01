@@ -10,6 +10,7 @@
 }
 
 .container {
+  cursor: grab;
   padding: 0 2rem;
   background: rgb(236, 112, 152);
   background: linear-gradient(
@@ -86,7 +87,7 @@
 
 .description {
   color: rebeccapurple;
-  margin: 4rem 0;
+  margin-bottom: 1em;
   line-height: 1.5;
   font-size: 1.5rem;
 }
@@ -153,6 +154,7 @@
   font-weight: bold;
   transition-duration: 0.4s;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  font-family: Menlo, Monaco, Courier New, monospace;
 }
 
 .button:active {

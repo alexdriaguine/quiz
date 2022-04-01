@@ -1,11 +1,13 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useState } from 'react';
+import { useKonami } from 'react-konami-code';
 import { QuizFancy } from '../components/quiz-fancy';
 import { Quiz } from '../components/quiz-ugly';
 
 const Home: NextPage = () => {
   const [showUgly, setShowUgly] = useState(false);
+  useKonami(() => setShowUgly(true));
 
   return (
     <div>
@@ -17,7 +19,7 @@ const Home: NextPage = () => {
       {showUgly ? (
         <Quiz changeToNormal={() => setShowUgly(false)} />
       ) : (
-        <QuizFancy changeToUgly={() => setShowUgly(true)} />
+        <QuizFancy changeToUgly={() => setShowUgly(false)} />
       )}
     </div>
   );
